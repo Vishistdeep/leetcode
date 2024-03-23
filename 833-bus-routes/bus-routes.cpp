@@ -1,33 +1,38 @@
 class Solution {
 public:
     int numBusesToDestination(vector<vector<int>>& routes, int source, int target) {
-       if(source==target)return 0;
-        unordered_map<int,vector<int>> stopToRoutes;
-        for(int i=0; i<routes.size(); i++){
-            for(int stop : routes[i]){
-                stopToRoutes[stop].push_back(i);
+        if (source == target) return 0;
+
+        int max_stop = -1;
+        for (auto route: routes) {
+            for (auto stop: route) {
+                max_stop = max(max_stop, stop);
             }
         }
-        vector<int> visitedRoute(routes.size(), 0);
-        queue<int> q;
-        q.push(source);
-        int buses = 0;
 
-        while(!q.empty()){
-            int size = q.size();
-            while(size--){
-                int stop = q.front(); q.pop();
-                if(stop == target) return buses;
-                for(int i : stopToRoutes[stop]){
-                    if(visitedRoute[i]) continue;
-                    visitedRoute[i] = 1;
-                    for(int nextStop : routes[i]){
-                        q.push(nextStop);
+        if (max_stop < target || max_stop < source) return -1;
+
+        int n = routes.size();
+        vector<int> dist(max_stop + 1, INT_MAX);
+        dist[source] = 0;
+
+        bool flag = true;
+        while (flag) {
+            flag = false;
+            for (auto route: routes) {
+                int min_dist = n + 1;
+                for (auto stop: route) min_dist = min(min_dist, dist[stop]);
+                min_dist++;
+
+                for (auto stop: route) {
+                    if (min_dist < dist[stop]) {
+                        dist[stop] = min_dist;
+                        flag = true;
                     }
                 }
             }
-            buses++;
         }
-        return -1;  
+
+        return dist[target] < n + 1 ? dist[target] : -1;
     }
 };
