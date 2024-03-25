@@ -8,7 +8,7 @@ public:
         while (left <= right) {
             mid = (left + right) / 2;
 
-            if (nums[mid] >= target) {
+            if (nums[mid] > target) {
                 right = mid - 1;
             } else if (nums[mid] < target) {
                 left = mid + 1;
