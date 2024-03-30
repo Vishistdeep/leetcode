@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int subarraysWithKDistinct(vector<int>& nums, int k) {
+         return swamkd(nums, k) - swamkd(nums, k - 1);
+    }
+
+    int swamkd(std::vector<int>& nums, int k) {
+        int ans = 0;
+          vector<int> count(nums.size() + 1, 0);
+
+        int l = 0;
+        for (int r = 0; r < nums.size(); ++r) {
+            if (++count[nums[r]] == 1){
+                --k;
+            }
+            while (k == -1) {
+                if (--count[nums[l++]] == 0){
+                    ++k;
+                }
+            }
+            ans += r - l + 1; 
+        }
+        return ans; 
+    }
+};
