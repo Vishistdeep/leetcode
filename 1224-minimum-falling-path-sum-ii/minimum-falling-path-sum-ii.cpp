@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minFallingPathSum(vector<vector<int>>& grid) {
-         int n = grid.size(), m = grid[0].size();
+        int n = grid.size(), m = grid[0].size();
         int res = INT_MAX;
         vector<vector<int>> dp(n, vector<int>(m, -1));
 
@@ -28,5 +28,6 @@ public:
         }
 
         return res;
+        
     }
 };
