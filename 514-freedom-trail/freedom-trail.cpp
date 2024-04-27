@@ -3,8 +3,6 @@ public:
     int findRotateSteps(string ring, string key) {
       int n=ring.size();
         int m=key.size();
-        // cout<<n<<" "<<m;
-        // queue<vector<int>> q;
         vector<int> arr[26];
         for(int i=0;i<n;i++){
             arr[ring[i]-'a'].push_back(i);
