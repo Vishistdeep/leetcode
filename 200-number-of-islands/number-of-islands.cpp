@@ -1,7 +1,7 @@
 class Solution {
 public:
     int numIslands(vector<vector<char>>& grid) {
-        if(grid.empty() || grid[0].empty())
+         if(grid.empty() || grid[0].empty())
             return 0;
         
         int rows = grid.size();
@@ -27,6 +27,6 @@ public:
             }
         }
         
-        return islands; 
+        return islands;
     }
 };
