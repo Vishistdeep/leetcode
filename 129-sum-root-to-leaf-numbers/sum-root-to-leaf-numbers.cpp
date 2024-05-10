@@ -11,30 +11,17 @@
  */
 class Solution {
 public:
- void solve(TreeNode* root,string s,vector<string>& ans){
-        if(root==nullptr)
-            return;
-        s=s+to_string(root->val);
-        if(root->left==nullptr && root->right==nullptr)
-            ans.push_back(s);
-        else if(root->left==nullptr)
-            solve(root->right,s,ans);
-        else if(root->right==nullptr)
-            solve(root->left,s,ans);
-        else{
-            solve(root->left,s,ans);
-            solve(root->right,s,ans);
-        }
+   int sum=0;
+    void tonum(TreeNode* node, int digit){
+        if (!node) return;
+        digit=node->val+10*digit;
+        if (!node->left && !node->right)
+            sum+=digit;           
+        tonum(node->left, digit);
+        tonum(node->right, digit);
     }
     int sumNumbers(TreeNode* root) {
-        string s="";
-        vector<string> ans;
-        solve(root,s,ans);
-        int sol=0;
-        for(int i=0;i<ans.size();i++)
-        {
-            sol=sol+stoi(ans[i]);
-        }
-        return sol; 
+        tonum(root, 0);
+        return sum; 
     }
 };
