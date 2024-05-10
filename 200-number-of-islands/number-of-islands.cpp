@@ -1,30 +1,32 @@
 class Solution {
-public:  
-  int n, m;
-    bool inside(int i, int j) {
-        return (0<=i)&&(i<n)&&(0<=j)&&(j<m);
-    }
-    void dfs(int i, int j, vector<vector<char>>& grid){
-        if (!inside(i, j)) return;
-        if (grid[i][j]=='1'){
-            grid[i][j]='2';
-            dfs(i+1,j, grid);
-            dfs(i,j+1, grid);
-            dfs(i-1,j, grid);
-            dfs(i,j-1, grid);
-        }           
-    }
+public:
     int numIslands(vector<vector<char>>& grid) {
-        n=grid.size();
-        m=grid[0].size();
-        int num=0;
-        for(int i=0; i<n; i++)
-            for(int j=0; j<m; j++){
-                if(grid[i][j]=='1'){
-                    num++;
-                    dfs(i, j, grid);   
+        if(grid.empty() || grid[0].empty())
+            return 0;
+        
+        int rows = grid.size();
+        int cols = grid[0].size();
+        int islands = 0;
+        
+        function<void(int, int)> dfs = [&](int row, int col) {
+            if(row < 0 || col < 0 || row >= rows || col >= cols || grid[row][col] != '1')
+                return;
+            grid[row][col] = '0';
+            dfs(row - 1, col);
+            dfs(row + 1, col);
+            dfs(row, col - 1);
+            dfs(row, col + 1);
+        };
+        
+        for(int row = 0; row < rows; row++) {
+            for(int col = 0; col < cols; col++) {
+                if(grid[row][col] == '1') {
+                    dfs(row, col);
+                    islands++;
                 }
             }
-        return num; 
+        }
+        
+        return islands; 
     }
 };
