@@ -6,22 +6,22 @@ vector< pair<int,int> > s;
     }
     
     void push(int val) {
-         if(s.empty())
+       if(s.empty())
             s.push_back({val,val});
         else
-            s.push_back({val,min(s.back().second,val)});
+            s.push_back({val,min(s.back().second,val)});  
     }
     
     void pop() {
-         s.pop_back();
+       s.pop_back();  
     }
     
     int top() {
-         return s.back().first;
+      return s.back().first;   
     }
     
     int getMin() {
-        return s.back().second;
+         return s.back().second;
     }
 };
 
