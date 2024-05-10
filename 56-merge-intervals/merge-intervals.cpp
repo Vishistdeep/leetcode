@@ -1,8 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-             
-      if(intervals.size()==1)
+        if(intervals.size()==1)
          return intervals;
       vector<pair<int,int>> p;
       for(int i=0;i<intervals.size();i++)
@@ -31,6 +30,6 @@ public:
       } 
       int n=intervals.size();
       ans.push_back({f,s});
-      return ans;
+      return ans; 
     }
 };
